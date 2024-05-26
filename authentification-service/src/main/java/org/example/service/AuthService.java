@@ -1,9 +1,7 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.LoginDto;
-import org.example.dto.RegisterDto;
-import org.example.dto.ResponseDto;
+import org.example.dto.*;
 import org.example.exception.BadRequestException;
 import org.example.exception.UnAuthorizedException;
 import org.example.utils.ConverterUtils;
@@ -22,22 +20,24 @@ public class AuthService {
 
     public ResponseDto login(LoginDto request) {
         Map<String, Object> loginResponse = integrationService.callUserService("http://user-service/users/login", request, HttpMethod.POST);
-
         assert loginResponse != null;
         final String userId = loginResponse.get("id").toString();
         final String email = loginResponse.get("email").toString();
+        final String name = loginResponse.get("name").toString();
         final boolean isActive = ConverterUtils.convertToBoolean(loginResponse.get("active"));
 
         if (!isActive) {
             throw new UnAuthorizedException("User is not active");
         }
 
-        String accessToken = jwtUtils.generateToken(userId, email, "ACCESS");
-        String refreshToken = jwtUtils.generateToken(userId, email, "REFRESH");
-        Map<String, Object> data = new HashMap<>();
-        data.put("access_token", accessToken);
-        data.put("refresh_token", refreshToken);
-
+        final String accessToken = jwtUtils.generateToken(userId, email, "ACCESS");
+        final String refreshToken = jwtUtils.generateToken(userId, email, "REFRESH");
+        LoginDetailDto data = new LoginDetailDto();
+        data.setEmail(email);
+        data.setName(name);
+        data.setIsActive(true);
+        data.setAccessToken(accessToken);
+        data.setRefreshToken(refreshToken);
         return new ResponseDto("00", "Success", data);
     }
 
@@ -48,6 +48,10 @@ public class AuthService {
 
         Map<String, Object> registerResponse = integrationService.callUserService("http://user-service/users/register", request, HttpMethod.POST);
         assert registerResponse != null;
-        return new ResponseDto("00", "Success", null);
+        RegisterDetailDto data = new RegisterDetailDto();
+        data.setEmail(request.getEmail());
+        data.setName(request.getName());
+        data.setIsActive(ConverterUtils.convertToBoolean(registerResponse.get("active")));
+        return new ResponseDto("00", "Success", data);
     }
 }

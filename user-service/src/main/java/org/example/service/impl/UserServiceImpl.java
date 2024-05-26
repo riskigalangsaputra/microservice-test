@@ -50,6 +50,10 @@ public class UserServiceImpl implements UserService {
         users.setActive(false);
         users.setPassword(PasswordUtils.encodeBase64(request.getPassword()));
         usersRepository.save(users);
-        return UserDto.builder().build();
+        return UserDto.builder()
+                .email(users.getEmail())
+                .name(users.getName())
+                .active(users.getActive())
+                .build();
     }
 }

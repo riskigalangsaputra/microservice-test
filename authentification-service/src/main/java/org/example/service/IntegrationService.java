@@ -37,15 +37,15 @@ public class IntegrationService {
             switch (statusCode) {
                 case HttpStatus.UNAUTHORIZED -> {
                     log.error("Unauthorized: {}", e.getMessage());
-                    throw new UnAuthorizedException(e.getMessage());
+                    throw new UnAuthorizedException("Unauthorized"); // message is manually
                 }
                 case HttpStatus.BAD_REQUEST -> {
                     log.error("Bad Request: {}", e.getResponseBodyAsString());
-                    throw new BadRequestException(e.getMessage());
+                    throw new BadRequestException("Bad Request");
                 }
                 case HttpStatus.CONFLICT -> {
                     log.error("Conflict: {}", e.getResponseBodyAsString());
-                    throw new ConflictException(e.getMessage());
+                    throw new ConflictException("Conflict");
                 }
                 default -> {
                     log.error("Client error: {}", e.getResponseBodyAsString());
