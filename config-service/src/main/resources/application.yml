@@ -1,0 +1,9 @@
+server:
+  port: 9297
+
+spring:
+  application:
+    name: config-service
+
+    compatibility-verifier:
+      enabled: false

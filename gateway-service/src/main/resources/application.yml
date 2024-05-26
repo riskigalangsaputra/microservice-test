@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+    compatibility-verifier:
+      enabled: false
+
+jwt:
+  secret: 9r8JZ7vJb5z3YhG7V9c8Y2b4Z6L7n8H6

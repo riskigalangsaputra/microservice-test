@@ -1,0 +1,12 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: auth-service
+  cloud:
+    compatibility-verifier:
+      enabled: false
+
+jwt:
+  secret: 9r8JZ7vJb5z3YhG7V9c8Y2b4Z6L7n8H6
+  expiration: 3600000
