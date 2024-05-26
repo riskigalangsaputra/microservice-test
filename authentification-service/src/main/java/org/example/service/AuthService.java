@@ -1,12 +1,14 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.*;
+import org.example.dto.LoginDto;
+import org.example.dto.RegisterDto;
+import org.example.dto.ResponseDto;
 import org.example.exception.BadRequestException;
-import org.mindrot.jbcrypt.BCrypt;
+import org.example.exception.UnAuthorizedException;
+import org.example.utils.ConverterUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final RestTemplate restTemplate;
     private final JwtUtils jwtUtils;
     private final IntegrationService integrationService;
 
@@ -25,6 +26,11 @@ public class AuthService {
         assert loginResponse != null;
         final String userId = loginResponse.get("id").toString();
         final String email = loginResponse.get("email").toString();
+        final boolean isActive = ConverterUtils.convertToBoolean(loginResponse.get("active"));
+
+        if (!isActive) {
+            throw new UnAuthorizedException("User is not active");
+        }
 
         String accessToken = jwtUtils.generateToken(userId, email, "ACCESS");
         String refreshToken = jwtUtils.generateToken(userId, email, "REFRESH");
