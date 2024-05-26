@@ -11,7 +11,8 @@ configurasi database hanya ada di user-service.
 redis saya gunakan untuk publish / subcribe untuk kebutuhan kirim email.
 service sebagai publish adalah authentification-service, untuk subcribe nya adalah email-service.
 
-Noted : masih banyak yang harus di improve lagi dari design maupun source code.
+Noted : design saya lebih ke focus konsep atau design microservice nya, tidak mengimplement untuk case atau tema "sekolah" seperti yang di ujikan. 
+        Dan masih banyak yang harus di improve lagi dari design maupun source code.
 
 
 
