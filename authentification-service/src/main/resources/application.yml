@@ -7,6 +7,14 @@ spring:
     compatibility-verifier:
       enabled: false
 
+# Redis Configuration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 10s
+      channel-name: emailSender
+
 jwt:
   secret: 9r8JZ7vJb5z3YhG7V9c8Y2b4Z6L7n8H6
   expiration: 3600000
