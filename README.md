@@ -14,5 +14,7 @@ service sebagai publish adalah authentification-service, untuk subcribe nya adal
 Noted : design saya lebih ke focus konsep atau design microservice nya, tidak mengimplement untuk case atau tema "sekolah" seperti yang di ujikan. 
         Dan masih banyak yang harus di improve lagi dari design maupun source code.
 
+Kendala : untuk waktu dan focus pekerjaan masih terbagi - bagi.
+
 
 
