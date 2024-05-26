@@ -7,4 +7,11 @@
 
 ![image](https://github.com/riskigalangsaputra/microservice-test/assets/32057963/5cc87f84-066c-4617-93d2-f42e88a95753)
 
+configurasi database hanya ada di user-service.
+redis saya gunakan untuk publish / subcribe untuk kebutuhan kirim email.
+service sebagai publish adalah authentification-service, untuk subcribe nya adalah email-service.
+
+Noted : masih banyak yang harus di improve lagi dari design maupun source code.
+
+
 
