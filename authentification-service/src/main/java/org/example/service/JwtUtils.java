@@ -59,8 +59,8 @@ public class JwtUtils {
         }
     }
 
-    public String generateToken(String userId, String role, String tokenType) {
-        Map<String, String> claims = Map.of("id", userId, "role", role);
+    public String generateToken(String userId, String email, String tokenType) {
+        Map<String, String> claims = Map.of("id", userId, "email", email);
 
         long expirationTime;
         try {

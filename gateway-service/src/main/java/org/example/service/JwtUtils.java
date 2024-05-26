@@ -22,15 +22,12 @@ public class JwtUtils {
 
     @PostConstruct
     public void initKey() {
-        // Ensure the secret key is at least 32 characters long (256 bits)
         if (secret.length() < 32) {
             throw new IllegalArgumentException("JWT secret key must be at least 32 characters long");
         }
 
         try {
-            // Convert the secret key to a byte array
             byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
-            // Initialize the key using Keys.hmacShaKeyFor
             this.key = Keys.hmacShaKeyFor(keyBytes);
         } catch (WeakKeyException e) {
             throw new IllegalArgumentException("The provided JWT secret key is not strong enough. Please ensure it is at least 32 characters long.", e);
