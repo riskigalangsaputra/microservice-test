@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         Users users = new Users();
         users.setName(request.getName());
         users.setEmail(request.getEmail());
-        users.setActive(false);
+        users.setActive(true);
         users.setPassword(PasswordUtils.encodeBase64(request.getPassword()));
         usersRepository.save(users);
         return UserDto.builder()
