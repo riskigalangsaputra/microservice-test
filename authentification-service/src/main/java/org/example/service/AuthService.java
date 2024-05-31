@@ -55,7 +55,7 @@ public class AuthService {
         Map<String, Object> registerResponse = integrationService.callUserService("http://user-service/users/register", request, HttpMethod.POST);
         assert registerResponse != null;
         final String email = registerResponse.get("email").toString();
-        sendingEmail(email, "Please activate your account, by clicking the following link : " + "http://localhost:8080/auth/activation");
+        sendingEmail(email, "Registrasi berhasil");
 
         RegisterDetailDto data = new RegisterDetailDto();
         data.setEmail(request.getEmail());

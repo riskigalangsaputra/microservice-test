@@ -15,3 +15,12 @@ spring:
 
 jwt:
   secret: 9r8JZ7vJb5z3YhG7V9c8Y2b4Z6L7n8H6
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
